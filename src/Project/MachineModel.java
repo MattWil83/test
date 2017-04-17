@@ -5,7 +5,6 @@ import java.util.TreeMap;
 
 public class MachineModel {
 	
-	
 public final Map IMAP=new TreeMap();
 private CPU cpu=new CPU();
 private Memory memory=new Memory();
