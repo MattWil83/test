@@ -90,6 +90,30 @@ public class MachineModel {
 				cpu.setAccum(cpu.getAccum() / arg);
 				cpu.incrPC();}});
 
+		//IMAP entry for "AND"
+		IMAP.put(0x7, (arg,level) -> {
+			if(level < 0 || level > 1) {
+				throw new IllegalArgumentException(
+						"Illegal indirection level in AND instruction");}
+			if (level > 0) {
+				IMAP.get(0x7).execute(memory.getData(arg), level-1);
+			} else {
+				if (arg != 0 && cpu.getAccum() != 0) {
+					cpu.setAccum(1);}
+				else {
+					cpu.setAccum(0);}
+				cpu.incrPC();}});
+
+		//IMAP entry for "NOT"
+		IMAP.put(0x8, (arg,level) -> {
+			if(level != 0) {
+				throw new IllegalArgumentException(
+						"Illegal indirection level in NOT instruction");}
+			if(cpu.getAccum() == 0){
+				cpu.setAccum(1);}
+			else {
+				cpu.setAccum(0);}
+			cpu.incrPC();});
 
 
 
