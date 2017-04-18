@@ -14,13 +14,10 @@ public class MachineModel {
 	public MachineModel(HaltCallback callback) {
 		this.callback = callback;
 
-		//NOOP
+		//NOP
 		IMAP.put(0x0, (arg,level) -> {
-			if(level != 0) {
-				throw new IllegalArgumentException(
-						"Illegal indirection level in NOP instruction");}
-			if (level == 0) {
-				cpu.incrPC();}});
+			
+				cpu.incrPC();});
 
 		//LOD
 		IMAP.put(0x1, (arg,level) -> {
@@ -59,7 +56,7 @@ public class MachineModel {
 		IMAP.put(0x4, (arg, level) ->{
 			if(level < 0 || level > 2) {
 				throw new IllegalArgumentException(
-						"Illegal indirection level in ADD instruction");}
+						"Illegal indirection level in SUB instruction");}
 			if(level > 0) {
 				IMAP.get(0x3).execute(memory.getData(cpu.getMemBase()+arg), level-1);
 			} else {
@@ -70,7 +67,7 @@ public class MachineModel {
 		IMAP.put(0x5, (arg, level) ->{
 			if(level < 0 || level > 2) {
 				throw new IllegalArgumentException(
-						"Illegal indirection level in ADD instruction");}
+						"Illegal indirection level in MUL instruction");}
 			if(level > 0) {
 				IMAP.get(0x3).execute(memory.getData(cpu.getMemBase()+arg), level-1);
 			} else {
@@ -81,7 +78,7 @@ public class MachineModel {
 		IMAP.put(0x6, (arg, level) ->{
 			if(level < 0 || level > 2) {
 				throw new IllegalArgumentException(
-						"Illegal indirection level in ADD instruction");}
+						"Illegal indirection level in DIV instruction");}
 			if(level > 0) {
 				IMAP.get(0x3).execute(memory.getData(cpu.getMemBase()+arg), level-1);} 
 			if(arg==0)
@@ -90,7 +87,7 @@ public class MachineModel {
 				cpu.setAccum(cpu.getAccum() / arg);
 				cpu.incrPC();}});
 
-		//IMAP entry for "AND"
+		//AND
 		IMAP.put(0x7, (arg,level) -> {
 			if(level < 0 || level > 1) {
 				throw new IllegalArgumentException(
@@ -104,7 +101,7 @@ public class MachineModel {
 					cpu.setAccum(0);}
 				cpu.incrPC();}});
 
-		//IMAP entry for "NOT"
+		//NOT
 		IMAP.put(0x8, (arg,level) -> {
 			if(level != 0) {
 				throw new IllegalArgumentException(
@@ -115,7 +112,7 @@ public class MachineModel {
 				cpu.setAccum(0);}
 			cpu.incrPC();});
 
-		//IMAP entry for "CMPZ"
+		//CMPZ
 		IMAP.put(0x9, (arg,level) -> {
 			if(level != 1) {
 				throw new IllegalArgumentException(
@@ -126,7 +123,7 @@ public class MachineModel {
 				cpu.setAccum(0);}
 			cpu.incrPC();});
 
-		//IMAP entry for "CMPL"
+		//CMPL
 		IMAP.put(0xA, (arg,level) -> {
 			if(level != 1) {
 				throw new IllegalArgumentException(
@@ -137,13 +134,15 @@ public class MachineModel {
 				cpu.setAccum(0);}
 			cpu.incrPC();});
 
-		//IMAP entry for "JUMP"
+		//JUMP
 		IMAP.put(0xB, (arg,level) -> {
 			if(level < 0 || level > 1) {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in JUMP instruction");}
 			else{
 				cpu.setpCounter(arg);}});
+		
+		//JMPZ
 		IMAP.put(0xB, (arg,level) -> {
 			if(level < 0 || level > 1) {
 				throw new IllegalArgumentException(
@@ -152,7 +151,10 @@ public class MachineModel {
 				cpu.setpCounter(arg);}
 			else{
 				cpu.incrPC();}});
-			
+		//HALT
+		IMAP.put(0xF, (arg, level) -> {
+			callback.halt();			
+		});
 	}
 
 
