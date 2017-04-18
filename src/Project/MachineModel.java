@@ -115,7 +115,37 @@ public class MachineModel {
 				cpu.setAccum(0);}
 			cpu.incrPC();});
 
+		//IMAP entry for "CMPZ"
+		IMAP.put(0x9, (arg,level) -> {
+			if(level != 1) {
+				throw new IllegalArgumentException(
+						"Illegal indirection level in CMPZ instruction");}
+			if(memory.getData(arg) == 0){
+				cpu.setAccum(1);}
+			else{
+				cpu.setAccum(0);}
+			cpu.incrPC();});
 
+		//IMAP entry for "CMPL"
+		IMAP.put(0xA, (arg,level) -> {
+			if(level != 1) {
+				throw new IllegalArgumentException(
+						"Illegal indirection level in CMPL instruction");}
+			if(memory.getData(arg) < 0){
+				cpu.setAccum(1);}
+			else{
+				cpu.setAccum(0);}
+			cpu.incrPC();});
+
+		//IMAP entry for "JUMP"
+		IMAP.put(0xB, (arg,level) -> {
+			if(level < 0 || level > 1) {
+				throw new IllegalArgumentException(
+						"Illegal indirection level in JUMP instruction");}
+			if(level != 0){
+				IMAP.get(0xB).execute(memory.getData(arg), level-1);}
+			else{
+				cpu.setpCounter(arg);}});
 
 	}
 
