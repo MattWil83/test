@@ -142,11 +142,17 @@ public class MachineModel {
 			if(level < 0 || level > 1) {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in JUMP instruction");}
-			if(level != 0){
-				IMAP.get(0xB).execute(memory.getData(arg), level-1);}
 			else{
 				cpu.setpCounter(arg);}});
-
+		IMAP.put(0xB, (arg,level) -> {
+			if(level < 0 || level > 1) {
+				throw new IllegalArgumentException(
+						"Illegal indirection level in JUMP instruction");}
+			if(cpu.getAccum()==0){
+				cpu.setpCounter(arg);}
+			else{
+				cpu.incrPC();}});
+			
 	}
 
 
