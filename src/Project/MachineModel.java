@@ -11,9 +11,7 @@ public class MachineModel {
 	private HaltCallback callback;
 
 
-	public MachineModel(CPU cpu, Memory memory, HaltCallback callback) {
-		this.cpu = cpu;
-		this.memory = memory;
+	public MachineModel(HaltCallback callback) {
 		this.callback = callback;
 
 		Instruction ADD=IMAP.put(0x3, (arg, level) ->{
