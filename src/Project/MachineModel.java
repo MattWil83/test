@@ -164,6 +164,9 @@ public class MachineModel {
 
 
 
+	public Map<Integer, Instruction> getIMAP() {
+		return IMAP;
+	}
 
 
 
