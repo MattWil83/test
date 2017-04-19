@@ -140,7 +140,7 @@ public class MachineModel {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in JUMP instruction");}
 			else{
-				cpu.setpCounter(arg);}});
+				cpu.setpCounter(cpu.getpCounter()+arg);}});
 		
 		//JMPZ
 		IMAP.put(0xB, (arg,level) -> {
@@ -151,6 +151,7 @@ public class MachineModel {
 				cpu.setpCounter(arg);}
 			else{
 				cpu.incrPC();}});
+		
 		//HALT
 		IMAP.put(0xF, (arg, level) -> {
 			callback.halt();			
