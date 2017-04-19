@@ -103,9 +103,6 @@ public class MachineModel {
 
 		//NOT
 		IMAP.put(0x8, (arg,level) -> {
-			if(level != 0) {
-				throw new IllegalArgumentException(
-						"Illegal indirection level in NOT instruction");}
 			if(cpu.getAccum() == 0){
 				cpu.setAccum(1);}
 			else {

@@ -34,7 +34,6 @@ public class InstructionMap {
 		sourceCodes.add("JUMP");
 		sourceCodes.add("JUMPI");
 		sourceCodes.add("JUMPA");
-		sourceCodes.add("JUMPI");
 		sourceCodes.add("JUMPZ");
 		sourceCodes.add("JUMPZI");
 		sourceCodes.add("JUMPZA");
@@ -42,19 +41,66 @@ public class InstructionMap {
 		//add the other source code names listed above (24 including NOP)
 				
 		indirectOK.add("LOD");
+		indirectOK.add("LODI");
+		indirectOK.add("STO");
+		indirectOK.add("ADD");
+		indirectOK.add("ADDI");
+		indirectOK.add("SUB");
+		indirectOK.add("SUBI");
+		indirectOK.add("MUL");
+		indirectOK.add("MULI");
+		indirectOK.add("DIV");
+		indirectOK.add("DIVI");
 		//add the other source code names that allow indirect forms (11 including LOD)
 		
 		noArgument.add("HALT");
+		noArgument.add("NOT");
+		noArgument.add("NOP");
 		//add the other source code names that do not take arguments
 		//(3 including HALT)
 
 		opcode.put("NOP", 0x0);
+		opcode.put("LOD", 0x1);
+		opcode.put("LODI", 0x1);
+		opcode.put("STO", 0x2);
+		opcode.put("STOI", 0x2);
+		opcode.put("ADD", 0x3);
+		opcode.put("ADDI", 0x3);
+		opcode.put("SUB", 0x4);
+		opcode.put("SUBI", 0x4);
+		opcode.put("MUL", 0x5);
+		opcode.put("MULI", 0x5);
+		opcode.put("SUB", 0x6);
+		opcode.put("SUBI", 0x6);
+		opcode.put("AND", 0x7);
+		opcode.put("ANDI", 0x7);
+		opcode.put("NOT", 0x8);
+		opcode.put("NOTI", 0x8);
+		opcode.put("CMPZ", 0x9);
+		opcode.put("CMPL", 0xA);
+		opcode.put("JUMP", 0xB);
+		opcode.put("JUMPI", 0xB);
+		opcode.put("JUMPA", 0xB);
+		opcode.put("JMPZ", 0xC);
+		opcode.put("JMPZI", 0xC);
+		opcode.put("JMPZA", 0xC);
+		opcode.put("HALT", 0xF);
 		//add all the other instructions given in Project Part 1 and the mapping to their
 		//opcode, which is the number of the instruction. Note ADDI maps to 0x3, the same
 		//as ADD--similarly for the other instructions ending in I
 		//JUMPA maps to 0xB and JMPZ maps to 0xC (the same as JUMP and JMPZ)
 
 		mnemonics.put(0x0, "NOP");
+		mnemonics.put(0x1, "LOD");
+		mnemonics.put(0x2, "STO");
+		mnemonics.put(0x3, "ADD");
+		mnemonics.put(0x4, "SUB");
+		mnemonics.put(0x5, "MUL");
+		mnemonics.put(0x6, "DIV");
+		mnemonics.put(0x7, "AND");
+		mnemonics.put(0x8, "NOT");
+		mnemonics.put(0xB, "JUMP");
+		mnemonics.put(0xC, "JUMPZ");
 		//add one entry for 0x1 through 0xC and 0xF. Where there are multiple possibilities
 		//use the basic mnemonic, e.g. mnemonics.put(0x3, "ADD"), 
 		//mnemonics.put(0xB, "JUMP")
