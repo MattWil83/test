@@ -25,7 +25,7 @@ public class MachineModel {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in LOD instruction");}
 			if (level > 0) {
-				IMAP.get(0x1).execute(memory.getData(arg), level-1);}
+				IMAP.get(0x1).execute(memory.getData(cpu.getMemBase()), level-1);}
 			else {
 				cpu.setAccum(arg);
 				cpu.incrPC();}});
@@ -39,7 +39,7 @@ public class MachineModel {
 				memory.setData(arg, cpu.getAccum());
 				cpu.incrPC();}
 			else {
-				IMAP.get(0x2).execute(memory.getData(arg), level-1);}});
+				IMAP.get(0x2).execute(memory.getData(cpu.getMemBase()), level-1);}});
 
 		//ADD
 		IMAP.put(0x3, (arg, level) ->{
@@ -93,7 +93,7 @@ public class MachineModel {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in AND instruction");}
 			if (level > 0) {
-				IMAP.get(0x7).execute(memory.getData(arg), level-1);
+				IMAP.get(0x7).execute(memory.getData(cpu.getMemBase()), level-1);
 			} else {
 				if (arg != 0 && cpu.getAccum() != 0) {
 					cpu.setAccum(1);}
