@@ -7,15 +7,21 @@ import java.util.Scanner;
 
 public class Assembler {
 	public static void assemble(File input, File output, ArrayList<String> errors){
-		ArrayList<String> text=new ArrayList<>();
+		ArrayList<String> code=new ArrayList<>();
+		ArrayList<String> line=new ArrayList<>();
+		ArrayList<String> data=new ArrayList<>();
 		try (Scanner inp = new Scanner(input)) {
-			while(inp.hasNextLine()) {
-				text.add(inp.nextLine()); 
-			}
+			while(inp.hasNextLine()){
+				while(inp.nextLine()!="--"){
+				line.add(inp.nextLine());}
+			data.add(inp.nextLine());}
 		} catch (FileNotFoundException e) { 
 			errors.add(0, "Error: Unable to open the input file"); 
-			return;
-		}
+			return;}
 		
+		ArrayList<String>outtext=new ArrayList<>();
+		String[] parts = line.trim().split("\\s+");
+
+
 	}
 }

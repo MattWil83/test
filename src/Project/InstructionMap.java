@@ -76,8 +76,8 @@ public class InstructionMap {
 		opcode.put("ANDI", 0x7);
 		opcode.put("NOT", 0x8);
 		opcode.put("NOTI", 0x8);
-		opcode.put("CMPZ", 0x9);
-		opcode.put("CMPL", 0xA);
+		opcode.put("CMPZ", 0xA);
+		opcode.put("CMPL", 0x9);
 		opcode.put("JUMP", 0xB);
 		opcode.put("JUMPI", 0xB);
 		opcode.put("JUMPA", 0xB);

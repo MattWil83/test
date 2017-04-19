@@ -110,7 +110,7 @@ public class MachineModel {
 			cpu.incrPC();});
 
 		//CMPZ
-		IMAP.put(0x9, (arg,level) -> {
+		IMAP.put(0xA, (arg,level) -> {
 			if(level != 1) {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in CMPZ instruction");}
@@ -121,7 +121,7 @@ public class MachineModel {
 			cpu.incrPC();});
 
 		//CMPL
-		IMAP.put(0xA, (arg,level) -> {
+		IMAP.put(0x9, (arg,level) -> {
 			if(level != 1) {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in CMPL instruction");}
