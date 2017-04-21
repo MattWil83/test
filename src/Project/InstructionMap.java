@@ -1,5 +1,4 @@
 package Project;
-
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -13,7 +12,6 @@ public class InstructionMap {
 	public static Set<String> indirectOK= new TreeSet<>();
 
 	static {
-
 		sourceCodes.add("NOP");
 		sourceCodes.add("LOD");
 		sourceCodes.add("LODI");
@@ -34,28 +32,28 @@ public class InstructionMap {
 		sourceCodes.add("JUMP");
 		sourceCodes.add("JUMPI");
 		sourceCodes.add("JUMPA");
-		sourceCodes.add("JUMPZ");
-		sourceCodes.add("JUMPZI");
-		sourceCodes.add("JUMPZA");
+		sourceCodes.add("JMPZ");
+		sourceCodes.add("JMPZI");
+		sourceCodes.add("JMPZA");
 		sourceCodes.add("HALT");
 		//add the other source code names listed above (24 including NOP)
-				
+
 		indirectOK.add("LOD");
-		indirectOK.add("LODI");
 		indirectOK.add("STO");
 		indirectOK.add("ADD");
-		indirectOK.add("ADDI");
 		indirectOK.add("SUB");
-		indirectOK.add("SUBI");
 		indirectOK.add("MUL");
-		indirectOK.add("MULI");
 		indirectOK.add("DIV");
-		indirectOK.add("DIVI");
-		//add the other source code names that allow indirect forms (11 including LOD)
-		
+		indirectOK.add("AND");
+		indirectOK.add("CMPL");
+		indirectOK.add("CMPZ");
+		indirectOK.add("JUMP");
+		indirectOK.add("JMPZ");
+		//add the other source code names that allow indirect forms
+
 		noArgument.add("HALT");
-		noArgument.add("NOT");
 		noArgument.add("NOP");
+		noArgument.add("NOT");
 		//add the other source code names that do not take arguments
 		//(3 including HALT)
 
@@ -63,21 +61,19 @@ public class InstructionMap {
 		opcode.put("LOD", 0x1);
 		opcode.put("LODI", 0x1);
 		opcode.put("STO", 0x2);
-		opcode.put("STOI", 0x2);
 		opcode.put("ADD", 0x3);
 		opcode.put("ADDI", 0x3);
 		opcode.put("SUB", 0x4);
 		opcode.put("SUBI", 0x4);
 		opcode.put("MUL", 0x5);
 		opcode.put("MULI", 0x5);
-		opcode.put("SUB", 0x6);
-		opcode.put("SUBI", 0x6);
+		opcode.put("DIV", 0x6);
+		opcode.put("DIVI", 0x6);
 		opcode.put("AND", 0x7);
 		opcode.put("ANDI", 0x7);
 		opcode.put("NOT", 0x8);
-		opcode.put("NOTI", 0x8);
-		opcode.put("CMPZ", 0xA);
 		opcode.put("CMPL", 0x9);
+		opcode.put("CMPZ", 0xA);
 		opcode.put("JUMP", 0xB);
 		opcode.put("JUMPI", 0xB);
 		opcode.put("JUMPA", 0xB);
@@ -88,29 +84,23 @@ public class InstructionMap {
 		//add all the other instructions given in Project Part 1 and the mapping to their
 		//opcode, which is the number of the instruction. Note ADDI maps to 0x3, the same
 		//as ADD--similarly for the other instructions ending in I
-		//JUMPA maps to 0xB and JMPZ maps to 0xC (the same as JUMP and JMPZ)
 
-		
 		for(String str : opcode.keySet()) {
 			mnemonics.put(opcode.get(str), str);
 		}
-		mnemonics.put(0x0, "NOP");
-		mnemonics.put(0x1, "LOD");
-		mnemonics.put(0x2, "STO");
-		mnemonics.put(0x3, "ADD");
-		mnemonics.put(0x4, "SUB");
-		mnemonics.put(0x5, "MUL");
-		mnemonics.put(0x6, "DIV");
-		mnemonics.put(0x7, "AND");
-		mnemonics.put(0x8, "NOT");
-		mnemonics.put(0x9, "CMPL");
-		mnemonics.put(0xB, "JUMP");
-		mnemonics.put(0xC, "JUMPZ");
-		mnemonics.put(0xF, "HALT");
-		//add one entry for 0x1 through 0xC and 0xF. Where there are multiple possibilities
-		//use the basic mnemonic, e.g. mnemonics.put(0x3, "ADD"), 
-		//mnemonics.put(0xB, "JUMP")
-		//Here and in opcode, it is OK if you prefer to use 0,1,...,12 and 15 in place of 
-		//0x0, 0x1, ..., 0xC, and 0xF  
+		mnemonics.put(0,"NOP");
+		mnemonics.put(1,"LOD");
+		mnemonics.put(2,"STO");
+		mnemonics.put(3,"ADD");
+		mnemonics.put(4,"SUB");
+		mnemonics.put(5,"MUL");
+		mnemonics.put(6,"DIV");
+		mnemonics.put(7,"AND");
+		mnemonics.put(8,"NOT");
+		mnemonics.put(9,"CMPL");
+		mnemonics.put(0xA,"CMPZ");
+		mnemonics.put(0xB,"JUMP");
+		mnemonics.put(0xC,"JMPZ");
+		mnemonics.put(0xF,"HALT");
 	}
 }
