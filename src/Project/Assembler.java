@@ -2,6 +2,7 @@ package Project;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,7 +40,18 @@ public class Assembler {
 				outtext.add(Integer.toHexString(opcode).toUpperCase() + " " + lvl + " " + parts[1]);
 
 		}
-
-
+		outtext.add("-1");
+		outtext.addAll(data);
+		
+		try (PrintWriter out = new PrintWriter(output)){
+			for(String s : outtext) out.println(s);
+		} catch (FileNotFoundException e) {
+			errors.add("Cannot create output file");
+		}
+		
 	}
 }
+
+
+
+
