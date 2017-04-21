@@ -16,8 +16,8 @@ public class MachineModel {
 
 		//NOP
 		IMAP.put(0x0, (arg,level) -> {
-			
-				cpu.incrPC();});
+
+			cpu.incrPC();});
 
 		//LOD
 		IMAP.put(0x1, (arg,level) -> {
@@ -58,7 +58,7 @@ public class MachineModel {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in SUB instruction");}
 			if(level > 0) {
-				IMAP.get(0x3).execute(memory.getData(cpu.getMemBase()+arg), level-1);
+				IMAP.get(0x4).execute(memory.getData(cpu.getMemBase()+arg), level-1);
 			} else {
 				cpu.setAccum(cpu.getAccum() - arg);
 				cpu.incrPC();}});
@@ -69,7 +69,7 @@ public class MachineModel {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in MUL instruction");}
 			if(level > 0) {
-				IMAP.get(0x3).execute(memory.getData(cpu.getMemBase()+arg), level-1);
+				IMAP.get(0x5).execute(memory.getData(cpu.getMemBase()+arg), level-1);
 			} else {
 				cpu.setAccum(cpu.getAccum() * arg);
 				cpu.incrPC();}});
@@ -80,7 +80,7 @@ public class MachineModel {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in DIV instruction");}
 			if(level > 0) {
-				IMAP.get(0x3).execute(memory.getData(cpu.getMemBase()+arg), level-1);} 
+				IMAP.get(0x6).execute(memory.getData(cpu.getMemBase()+arg), level-1);} 
 			if(arg==0)
 				throw new DivideByZeroException("Cannot Divide By Zero");
 			else {
@@ -111,48 +111,107 @@ public class MachineModel {
 
 		//CMPZ
 		IMAP.put(0xA, (arg,level) -> {
-			if(level != 1) {
+			if(level != 1 || level != 2) {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in CMPZ instruction");}
-			if(memory.getData(arg) == 0){
-				cpu.setAccum(1);}
-			else{
-				cpu.setAccum(0);}
-			cpu.incrPC();});
+			if(level == 2){
+				IMAP.get(0xA).execute(memory.getData(cpu.getMemBase()+arg), level-1);
+			}
+			if(level == 1){
+				if(memory.getData(cpu.getMemBase()+arg) == 0){
+					cpu.setAccum(1);}
+				else{
+					cpu.setAccum(0);}
+				cpu.incrPC();}
+		});
 
 		//CMPL
 		IMAP.put(0x9, (arg,level) -> {
-			if(level != 1) {
+			if(level != 1 || level != 2) {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in CMPL instruction");}
-			if(memory.getData(arg) < 0){
-				cpu.setAccum(1);}
-			else{
-				cpu.setAccum(0);}
-			cpu.incrPC();});
+			if(level == 2){
+				IMAP.get(0x9).execute(memory.getData(cpu.getMemBase()+arg), level-1);
+			}
+			if(level == 1){
+				if(memory.getData(cpu.getMemBase()+arg) < 0){
+					cpu.setAccum(1);}
+				else{
+					cpu.setAccum(0);}
+				cpu.incrPC();}
+		});
 
 		//JUMP
 		IMAP.put(0xB, (arg,level) -> {
-			if(level < 0 || level > 1) {
+			if(level < 0 || level > 3) {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in JUMP instruction");}
+			if(level > 2){
+				//ABSOLUTE MODE (done in later part)
+			}
+			if(level > 1){
+				IMAP.get(0xB).execute(memory.getData(cpu.getMemBase()+arg), level-1);
+			}
 			else{
 				cpu.setpCounter(cpu.getpCounter()+arg);}});
-		
+
 		//JMPZ
 		IMAP.put(0xB, (arg,level) -> {
-			if(level < 0 || level > 1) {
+			if(level < 0 || level > 3) {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in JUMP instruction");}
-			if(cpu.getAccum()==0){
-				cpu.setpCounter(arg);}
+			if(level > 2){
+				//ABSOLUTE MODE
+			}
+			if(level > 0){
+				IMAP.get(0xC).execute(memory.getData(cpu.getMemBase()+arg), level-1);
+			}
 			else{
-				cpu.incrPC();}});
-		
+				if(cpu.getAccum()==0){
+					cpu.setpCounter(cpu.getpCounter()+arg);}
+				else{
+					cpu.incrPC();}}});
+
 		//HALT
 		IMAP.put(0xF, (arg, level) -> {
 			callback.halt();			
 		});
+	}
+
+
+
+	public int getAccum() {
+		return cpu.getAccum();
+	}
+
+
+
+	public int getpCounter() {
+		return cpu.getpCounter();
+	}
+
+
+
+	public int getMemBase() {
+		return cpu.getMemBase();
+	}
+
+
+
+	public void setAccum(int accum) {
+		cpu.setAccum(accum);
+	}
+
+
+
+	public void setpCounter(int pCounter) {
+		cpu.setpCounter(pCounter);
+	}
+
+
+
+	public void setMemBase(int memBase) {
+		cpu.setMemBase(memBase);
 	}
 
 
@@ -162,7 +221,9 @@ public class MachineModel {
 
 	}
 
-
+	public Instruction get(int instrNum){
+		return IMAP.get(instrNum);
+	}
 
 	public Map<Integer, Instruction> getIMAP() {
 		return IMAP;
