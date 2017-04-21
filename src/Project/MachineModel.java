@@ -9,16 +9,15 @@ public class MachineModel {
 	private CPU cpu=new CPU();
 	private Memory memory=new Memory();
 	private HaltCallback callback;
-
-
+	private Code Code = new Code();
+	
+	
 	public MachineModel(HaltCallback callback) {
 		this.callback = callback;
 
 		//NOP
 		IMAP.put(0x0, (arg,level) -> {
-			
 				cpu.incrPC();});
-
 		//LOD
 		IMAP.put(0x1, (arg,level) -> {
 			if(level < 0 || level > 2) {
@@ -29,7 +28,6 @@ public class MachineModel {
 			else {
 				cpu.setAccum(arg);
 				cpu.incrPC();}});
-
 		//STO
 		IMAP.put(0x2, (arg,level) -> {
 			if(level < 1 || level > 2) {
@@ -40,7 +38,6 @@ public class MachineModel {
 				cpu.incrPC();}
 			else {
 				IMAP.get(0x2).execute(memory.getData(cpu.getMemBase()), level-1);}});
-
 		//ADD
 		IMAP.put(0x3, (arg, level) ->{
 			if(level < 0 || level > 2) {
@@ -51,7 +48,6 @@ public class MachineModel {
 			} else {
 				cpu.setAccum(cpu.getAccum() + arg);
 				cpu.incrPC();}});
-
 		//SUB
 		IMAP.put(0x4, (arg, level) ->{
 			if(level < 0 || level > 2) {
@@ -62,7 +58,6 @@ public class MachineModel {
 			} else {
 				cpu.setAccum(cpu.getAccum() - arg);
 				cpu.incrPC();}});
-
 		//MUL
 		IMAP.put(0x5, (arg, level) ->{
 			if(level < 0 || level > 2) {
@@ -73,7 +68,6 @@ public class MachineModel {
 			} else {
 				cpu.setAccum(cpu.getAccum() * arg);
 				cpu.incrPC();}});
-
 		//DIV
 		IMAP.put(0x6, (arg, level) ->{
 			if(level < 0 || level > 2) {
@@ -86,7 +80,6 @@ public class MachineModel {
 			else {
 				cpu.setAccum(cpu.getAccum() / arg);
 				cpu.incrPC();}});
-
 		//AND
 		IMAP.put(0x7, (arg,level) -> {
 			if(level < 0 || level > 1) {
@@ -100,7 +93,6 @@ public class MachineModel {
 				else {
 					cpu.setAccum(0);}
 				cpu.incrPC();}});
-
 		//NOT
 		IMAP.put(0x8, (arg,level) -> {
 			if(cpu.getAccum() == 0){
@@ -108,7 +100,6 @@ public class MachineModel {
 			else {
 				cpu.setAccum(0);}
 			cpu.incrPC();});
-
 		//CMPZ
 		IMAP.put(0xA, (arg,level) -> {
 			if(level != 1) {
@@ -119,7 +110,6 @@ public class MachineModel {
 			else{
 				cpu.setAccum(0);}
 			cpu.incrPC();});
-
 		//CMPL
 		IMAP.put(0x9, (arg,level) -> {
 			if(level != 1) {
@@ -130,7 +120,6 @@ public class MachineModel {
 			else{
 				cpu.setAccum(0);}
 			cpu.incrPC();});
-
 		//JUMP
 		IMAP.put(0xB, (arg,level) -> {
 			if(level < 0 || level > 1) {
@@ -138,9 +127,8 @@ public class MachineModel {
 						"Illegal indirection level in JUMP instruction");}
 			else{
 				cpu.setpCounter(cpu.getpCounter()+arg);}});
-		
 		//JMPZ
-		IMAP.put(0xB, (arg,level) -> {
+		IMAP.put(0xC, (arg,level) -> {
 			if(level < 0 || level > 1) {
 				throw new IllegalArgumentException(
 						"Illegal indirection level in JUMP instruction");}
@@ -148,26 +136,28 @@ public class MachineModel {
 				cpu.setpCounter(arg);}
 			else{
 				cpu.incrPC();}});
-		
 		//HALT
 		IMAP.put(0xF, (arg, level) -> {
-			callback.halt();			
-		});
+			callback.halt();});
 	}
-
 
 
 	public MachineModel() {
-		this(() -> System.exit(0));
-
-	}
-
-
+		this(() -> System.exit(0));}
 
 	public Map<Integer, Instruction> getIMAP() {
-		return IMAP;
-	}
+		return IMAP;}
 
+	 public void setCode(int index, int op, int indirLvl, int arg){
+		 Code.setCode(index, op, indirLvl, arg);}
+	 public Code getCode(){
+		 return Code;}
 
-
+	 
+	 
+	 
+	 
 }
+
+
+

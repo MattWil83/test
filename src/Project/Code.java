@@ -2,7 +2,7 @@ package Project;
 
 public class Code {
 	public static final int CODE_MAX=1024;
-	private long[] code=new long[1024];
+	private long[] code=new long[CODE_MAX];
 
 
 	public void setCode(int index, int op, int indirLvl, int arg) {
@@ -19,6 +19,12 @@ public class Code {
 		longArg = longArg & 0x00000000FFFFFFFFL;
 		//join the upper 32 bits and the lower 32 bits
 		code[index] = OpAndArg | longArg;
+	}
+
+
+	public void clear(int start, int length){
+		for(int i=0;i<code.length;i++)
+			code[i]=0;
 	}
 
 	int getOp(int i) {
@@ -38,6 +44,46 @@ public class Code {
 		return (int)(code[i] & 0x00000000FFFFFFFFL);
 	}
 
+	public String getText(int i){
+		StringBuilder bldr = new StringBuilder();
+		bldr.append(InstructionMap.mnemonics.get(getOp(i)));
+		int x = getIndirLvl(i);
+		if(x==0)
+			bldr.append("I ");
+		if(x==1)
+			bldr.append(" ");
+		if(x==2)
+			bldr.append(" [");
+		if(x==3)
+			bldr.append("A ");
+		int arg = getArg(i);
+		if(arg<0)
+			bldr.append('-'+Integer.toHexString(-arg).toUpperCase());
+		if(arg>=0)
+			bldr.append(Integer.toHexString(arg).toUpperCase());
+		if(x==2)
+			bldr.append(']');
+		return bldr.toString();
+
+	}
+
+	public static void main(String[] args) {
+		Code c = new Code();
+		for(int i = 0; i <= 3; i++) {
+			c.setCode(2*i, 12, i, 2015);
+			System.out.print(c.getText(2*i) + ", ");
+			System.out.print(c.code[2*i] + ", ");
+			System.out.print(c.getOp(2*i) + " ");
+			System.out.print(c.getIndirLvl(2*i) + " ");
+			System.out.println(c.getArg(2*i));
+			c.setCode(2*i+1, 12, i, -2015);
+			System.out.print(c.getText(2*i+1) + ", ");
+			System.out.print(c.code[2*i+1] + ", ");
+			System.out.print(c.getOp(2*i+1) + " ");
+			System.out.print(c.getIndirLvl(2*i+1) + " ");
+			System.out.println(c.getArg(2*i+1));
+		}
+	}
 
 }
 

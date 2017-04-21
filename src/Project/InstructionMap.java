@@ -85,9 +85,9 @@ public class InstructionMap {
 		//opcode, which is the number of the instruction. Note ADDI maps to 0x3, the same
 		//as ADD--similarly for the other instructions ending in I
 
-		for(String str : opcode.keySet()) {
-			mnemonics.put(opcode.get(str), str);
-		}
+//		for(String str : opcode.keySet()) {
+//			mnemonics.put(opcode.get(str), str);
+//		}
 		mnemonics.put(0,"NOP");
 		mnemonics.put(1,"LOD");
 		mnemonics.put(2,"STO");
