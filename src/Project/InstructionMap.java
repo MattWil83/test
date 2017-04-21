@@ -41,16 +41,16 @@ public class InstructionMap {
 		//add the other source code names listed above (24 including NOP)
 				
 		indirectOK.add("LOD");
-		indirectOK.add("LODI");
 		indirectOK.add("STO");
 		indirectOK.add("ADD");
-		indirectOK.add("ADDI");
 		indirectOK.add("SUB");
-		indirectOK.add("SUBI");
 		indirectOK.add("MUL");
-		indirectOK.add("MULI");
 		indirectOK.add("DIV");
-		indirectOK.add("DIVI");
+		indirectOK.add("AND");
+		indirectOK.add("CMPL");
+		indirectOK.add("CMPZ");
+		indirectOK.add("JUMP");
+		indirectOK.add("JMPZ");
 		//add the other source code names that allow indirect forms (11 including LOD)
 		
 		noArgument.add("HALT");
@@ -63,19 +63,17 @@ public class InstructionMap {
 		opcode.put("LOD", 0x1);
 		opcode.put("LODI", 0x1);
 		opcode.put("STO", 0x2);
-		opcode.put("STOI", 0x2);
 		opcode.put("ADD", 0x3);
 		opcode.put("ADDI", 0x3);
 		opcode.put("SUB", 0x4);
 		opcode.put("SUBI", 0x4);
 		opcode.put("MUL", 0x5);
 		opcode.put("MULI", 0x5);
-		opcode.put("SUB", 0x6);
-		opcode.put("SUBI", 0x6);
+		opcode.put("DIV", 0x6);
+		opcode.put("DIVI", 0x6);
 		opcode.put("AND", 0x7);
 		opcode.put("ANDI", 0x7);
 		opcode.put("NOT", 0x8);
-		opcode.put("NOTI", 0x8);
 		opcode.put("CMPZ", 0xA);
 		opcode.put("CMPL", 0x9);
 		opcode.put("JUMP", 0xB);
@@ -104,6 +102,7 @@ public class InstructionMap {
 		mnemonics.put(0x7, "AND");
 		mnemonics.put(0x8, "NOT");
 		mnemonics.put(0x9, "CMPL");
+		mnemonics.put(0xA,"CMPZ");
 		mnemonics.put(0xB, "JUMP");
 		mnemonics.put(0xC, "JUMPZ");
 		mnemonics.put(0xF, "HALT");
