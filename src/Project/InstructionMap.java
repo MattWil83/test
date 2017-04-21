@@ -90,6 +90,10 @@ public class InstructionMap {
 		//as ADD--similarly for the other instructions ending in I
 		//JUMPA maps to 0xB and JMPZ maps to 0xC (the same as JUMP and JMPZ)
 
+		
+		for(String str : opcode.keySet()) {
+			mnemonics.put(opcode.get(str), str);
+		}
 		mnemonics.put(0x0, "NOP");
 		mnemonics.put(0x1, "LOD");
 		mnemonics.put(0x2, "STO");
@@ -99,8 +103,10 @@ public class InstructionMap {
 		mnemonics.put(0x6, "DIV");
 		mnemonics.put(0x7, "AND");
 		mnemonics.put(0x8, "NOT");
+		mnemonics.put(0x9, "CMPL");
 		mnemonics.put(0xB, "JUMP");
 		mnemonics.put(0xC, "JUMPZ");
+		mnemonics.put(0xF, "HALT");
 		//add one entry for 0x1 through 0xC and 0xF. Where there are multiple possibilities
 		//use the basic mnemonic, e.g. mnemonics.put(0x3, "ADD"), 
 		//mnemonics.put(0xB, "JUMP")
