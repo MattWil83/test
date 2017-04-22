@@ -12,16 +12,6 @@ public class Assembler {
 		ArrayList<String> data=new ArrayList<>();
 		String temp;
 		try (Scanner inp = new Scanner(input)) {
-<<<<<<< HEAD
-			if(inp.hasNextLine()){
-				String eachLine = inp.nextLine();
-				while(inp.hasNextLine() && !(eachLine.trim().startsWith("--"))){
-					code.add(eachLine);
-					eachLine = inp.nextLine();}
-				while(inp.hasNextLine()){
-					eachLine = inp.nextLine();
-					data.add(eachLine);}}
-=======
 			while(inp.hasNextLine()){
 				temp=inp.nextLine();
 				while(!temp.startsWith("--")){
@@ -31,7 +21,6 @@ public class Assembler {
 					data.add(inp.nextLine());
 				}
 				}
->>>>>>> origin/master
 		} catch (FileNotFoundException e) { 
 			errors.add(0, "Error: Unable to open the input file"); 
 			return;}
@@ -68,19 +57,11 @@ public class Assembler {
 
 	}
 	
-<<<<<<< HEAD
-//	public static void main(String[] args) {
-//		ArrayList<String> errors = new ArrayList<>();
-//		assemble(new File("in.pasm.txt"), new File("out.pexe"), errors);		
-//	}
-=======
 	public static void main(String[] args) {
 		ArrayList<String> errors = new ArrayList<>();
-		assemble(new File("in.pasm"), new File("out.pexe"), errors);		
+		assemble(new File("in.pasm.txt"), new File("out.pexe"), errors);		
 	}
-	
-	
->>>>>>> origin/master
+
 }
 
 

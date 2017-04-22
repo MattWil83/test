@@ -49,13 +49,9 @@ public class InstructionMap {
 		indirectOK.add("CMPZ");
 		indirectOK.add("JUMP");
 		indirectOK.add("JMPZ");
-<<<<<<< HEAD
-		//add the other source code names that allow indirect forms (11 including LOD)
-		
-=======
-		//add the other source code names that allow indirect forms
 
->>>>>>> origin/master
+        //add the other source code names that allow indirect forms (11 including LOD)
+		
 		noArgument.add("HALT");
 		noArgument.add("NOP");
 		noArgument.add("NOT");
@@ -77,10 +73,6 @@ public class InstructionMap {
 		opcode.put("AND", 0x7);
 		opcode.put("ANDI", 0x7);
 		opcode.put("NOT", 0x8);
-<<<<<<< HEAD
-		opcode.put("CMPZ", 0xA);
-=======
->>>>>>> origin/master
 		opcode.put("CMPL", 0x9);
 		opcode.put("CMPZ", 0xA);
 		opcode.put("JUMP", 0xB);
@@ -94,31 +86,6 @@ public class InstructionMap {
 		//opcode, which is the number of the instruction. Note ADDI maps to 0x3, the same
 		//as ADD--similarly for the other instructions ending in I
 
-<<<<<<< HEAD
-		
-		for(String str : opcode.keySet()) {
-			mnemonics.put(opcode.get(str), str);
-		}
-		mnemonics.put(0x0, "NOP");
-		mnemonics.put(0x1, "LOD");
-		mnemonics.put(0x2, "STO");
-		mnemonics.put(0x3, "ADD");
-		mnemonics.put(0x4, "SUB");
-		mnemonics.put(0x5, "MUL");
-		mnemonics.put(0x6, "DIV");
-		mnemonics.put(0x7, "AND");
-		mnemonics.put(0x8, "NOT");
-		mnemonics.put(0x9, "CMPL");
-		mnemonics.put(0xA,"CMPZ");
-		mnemonics.put(0xB, "JUMP");
-		mnemonics.put(0xC, "JUMPZ");
-		mnemonics.put(0xF, "HALT");
-		//add one entry for 0x1 through 0xC and 0xF. Where there are multiple possibilities
-		//use the basic mnemonic, e.g. mnemonics.put(0x3, "ADD"), 
-		//mnemonics.put(0xB, "JUMP")
-		//Here and in opcode, it is OK if you prefer to use 0,1,...,12 and 15 in place of 
-		//0x0, 0x1, ..., 0xC, and 0xF  
-=======
 //		for(String str : opcode.keySet()) {
 //			mnemonics.put(opcode.get(str), str);
 //		}
@@ -136,6 +103,5 @@ public class InstructionMap {
 		mnemonics.put(0xB,"JUMP");
 		mnemonics.put(0xC,"JMPZ");
 		mnemonics.put(0xF,"HALT");
->>>>>>> origin/master
 	}
 }
