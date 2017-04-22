@@ -12,8 +12,8 @@ public class MachineModel {
 	private Code Code = new Code();
 	
 	
-	public MachineModel(HaltCallback callback) {
-		this.callback = callback;
+	public MachineModel(){//HaltCallback callback) {
+		//this.callback = callback;
 
 		//NOP
 		IMAP.put(0x0, (arg,level) -> {
@@ -171,6 +171,18 @@ public class MachineModel {
 
 
 
+	public int getData(int index) {
+		return memory.getData(index);
+	}
+
+
+
+	public Memory getMemory() {
+		return memory;
+	}
+
+
+
 	public int getAccum() {
 		return cpu.getAccum();
 	}
@@ -218,6 +230,12 @@ public class MachineModel {
 		 Code.setCode(index, op, indirLvl, arg);}
 	 public Code getCode(){
 		 return Code;}
+
+
+
+	public void setData(int index, int value) {
+		memory.setData(index, value);
+	}
 
 
 	 

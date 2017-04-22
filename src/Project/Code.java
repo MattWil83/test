@@ -67,23 +67,23 @@ public class Code {
 
 	}
 
-	public static void main(String[] args) {
-		Code c = new Code();
-		for(int i = 0; i <= 3; i++) {
-			c.setCode(2*i, 12, i, 2015);
-			System.out.print(c.getText(2*i) + ", ");
-			System.out.print(c.code[2*i] + ", ");
-			System.out.print(c.getOp(2*i) + " ");
-			System.out.print(c.getIndirLvl(2*i) + " ");
-			System.out.println(c.getArg(2*i));
-			c.setCode(2*i+1, 12, i, -2015);
-			System.out.print(c.getText(2*i+1) + ", ");
-			System.out.print(c.code[2*i+1] + ", ");
-			System.out.print(c.getOp(2*i+1) + " ");
-			System.out.print(c.getIndirLvl(2*i+1) + " ");
-			System.out.println(c.getArg(2*i+1));
-		}
-	}
+//	public static void main(String[] args) {
+//		Code c = new Code();
+//		for(int i = 0; i <= 3; i++) {
+//			c.setCode(2*i, 12, i, 2015);
+//			System.out.print(c.getText(2*i) + ", ");
+//			System.out.print(c.code[2*i] + ", ");
+//			System.out.print(c.getOp(2*i) + " ");
+//			System.out.print(c.getIndirLvl(2*i) + " ");
+//			System.out.println(c.getArg(2*i));
+//			c.setCode(2*i+1, 12, i, -2015);
+//			System.out.print(c.getText(2*i+1) + ", ");
+//			System.out.print(c.code[2*i+1] + ", ");
+//			System.out.print(c.getOp(2*i+1) + " ");
+//			System.out.print(c.getIndirLvl(2*i+1) + " ");
+//			System.out.println(c.getArg(2*i+1));
+//		}
+//	}
 
 }
 
