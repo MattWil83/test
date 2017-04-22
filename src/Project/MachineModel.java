@@ -12,8 +12,8 @@ public class MachineModel {
 	private Code Code = new Code();
 	
 	
-	public MachineModel(){//HaltCallback callback) {
-		//this.callback = callback;
+	public MachineModel(HaltCallback callback) {
+		this.callback = callback;
 
 		//NOP
 		IMAP.put(0x0, (arg,level) -> {
