@@ -64,21 +64,23 @@ public class Assembler2 {
 				else if(parts.length==2&&parts[1].startsWith("[")&&InstructionMap.indirectOK.contains(parts[0])){
 					if(!parts[1].endsWith("]"))
 						errors.add("Error: line " + (intext.indexOf(line)+1) + " Does not end with ]");
-					else if(parts[0].endsWith("]")){
-						parts[0].substring(1, parts[0].length()-1);
+					else if(parts[1].endsWith("]")){
+						parts[1]=parts[1].substring(1, parts[1].length()-1);
 						lvl=2;}}
 
-//				else if(parts.length!=2)
-//					errors.add("Error: line " + (intext.indexOf(line)+1) + " Instruction missing argument");
+				//else if(parts.length!=2)
+				//errors.add("Error: line " + (intext.indexOf(line)+1) + " Instruction missing argument");
 
 				System.out.println(parts[0]);
 				int arg = 0; 
-//							try {
-//								arg = Integer.parseInt(parts[1],16);
-//							} catch (NumberFormatException e) {
-//								errors.add("Error: line " + (intext.indexOf(line)+1) + " does not have a numeric argument");
-//							}
-			
+				if(parts.length!=1){
+					System.out.println(parts[1]);
+					try {
+						arg = Integer.parseInt(parts[1],16);
+					} catch (NumberFormatException e) {
+						errors.add("Error: line " + (intext.indexOf(line)+1) + " does not have a numeric argument");
+					}}
+
 			}
 			for(String line:code){
 				String[] parts = line.trim().split("\\s+");
@@ -98,20 +100,20 @@ public class Assembler2 {
 					outtext.add(Integer.toHexString(opcode).toUpperCase() + " 1 0");
 				if(parts.length==2)
 					outtext.add(Integer.toHexString(opcode).toUpperCase() + " " + lvl + " " + parts[1]);}
-			
-			
+
+
 			System.out.println(errors.toString());
 			outtext.add("-1");
 			outtext.addAll(data);
-			
+
 			if(errors.size()<1){
 				try (PrintWriter out = new PrintWriter(output)){
 					for(String s : outtext) out.println(s);
 				} catch (FileNotFoundException e) {
 					errors.add("Cannot create output file");}}}
-		
+
 		System.out.println(data.toString());}
-	
+
 	public static void main(String[] args) {
 		ArrayList<String> errors = new ArrayList<>();
 		assemble(new File("in.pasm"), new File("out.pexe"), errors);}
