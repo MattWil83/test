@@ -6,14 +6,14 @@ public class Memory {
 	int[] getData() {
 		return data;
 	}
-	void setData(int[] data) {
+	public void setData(int[] data) {
 		this.data = data;
 	}
 	
-	int getData(int index) {
+	public int getData(int index) {
 		return data[index];
 	}
-	void setData(int index,int value) {
+	public void setData(int index,int value) {
 		this.data[index] = value;
 	}
 	

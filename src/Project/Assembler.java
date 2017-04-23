@@ -48,21 +48,20 @@ public class Assembler {
 		}
 		outtext.add("-1");
 		outtext.addAll(data);
-		
+
 		try (PrintWriter out = new PrintWriter(output)){
 			for(String s : outtext) out.println(s);
 		} catch (FileNotFoundException e) {
 			errors.add("Cannot create output file");
 		}
-		
+
 	}
 	
 	public static void main(String[] args) {
 		ArrayList<String> errors = new ArrayList<>();
-		assemble(new File("in.pasm"), new File("out.pexe"), errors);		
+		assemble(new File("in.pasm.txt"), new File("out.pexe"), errors);		
 	}
-	
-	
+
 }
 
 

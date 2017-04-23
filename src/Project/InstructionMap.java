@@ -49,8 +49,9 @@ public class InstructionMap {
 		indirectOK.add("CMPZ");
 		indirectOK.add("JUMP");
 		indirectOK.add("JMPZ");
-		//add the other source code names that allow indirect forms
 
+        //add the other source code names that allow indirect forms (11 including LOD)
+		
 		noArgument.add("HALT");
 		noArgument.add("NOP");
 		noArgument.add("NOT");
