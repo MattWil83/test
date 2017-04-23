@@ -170,13 +170,6 @@ public class MachineModel {
 	}
 
 
-
-	public int getData(int index) {
-		return memory.getData(index);
-	}
-
-
-
 	public Memory getMemory() {
 		return memory;
 	}
@@ -233,7 +226,7 @@ public class MachineModel {
 	 public Code getCode(){
 		 return Code;}
 
-<<<<<<< HEAD
+
 	 public int getData(int index){
 		 return memory.getData(index);
 	 }
@@ -241,14 +234,8 @@ public class MachineModel {
 	 public void setData(int index, int value){
 		 memory.setData(index, value);
 	 }
-=======
 
 
-	public void setData(int index, int value) {
-		memory.setData(index, value);
-	}
-
->>>>>>> 1fc112362d0819be07dd631ec2934be0367a2e67
 
 	 
 	 
