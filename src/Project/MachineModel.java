@@ -211,7 +211,9 @@ public class MachineModel {
 	 public void setData(int index, int value){
 		 memory.setData(index, value);}
 
-
+	 public int[] getData(){
+		 return memory.getData();
+	 }
 
 	 
 	 
