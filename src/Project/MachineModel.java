@@ -169,71 +169,47 @@ public class MachineModel {
 			callback.halt();});
 	}
 
-
+	public MachineModel() {
+		this(() -> System.exit(0));}
+	
 	public Memory getMemory() {
-		return memory;
-	}
-
-
-
+		return memory;}
+	
 	public int getAccum() {
-		return cpu.getAccum();
-	}
-
-
-
+		return cpu.getAccum();}
+	
 	public int getpCounter() {
-		return cpu.getpCounter();
-	}
-
-
-
+		return cpu.getpCounter();}
+	
 	public int getMemBase() {
-		return cpu.getMemBase();
-	}
-
-
-
+		return cpu.getMemBase();}
+	
 	public void setAccum(int accum) {
-		cpu.setAccum(accum);
-	}
-
-
-
+		cpu.setAccum(accum);}
+	
 	public void setpCounter(int pCounter) {
-		cpu.setpCounter(pCounter);
-	}
-
-
-
+		cpu.setpCounter(pCounter);}
+	
 	public void setMemBase(int memBase) {
-		cpu.setMemBase(memBase);
-	}
-
-
-
-
+		cpu.setMemBase(memBase);}
+	
 	public Instruction get(int instrNum){
-		return IMAP.get(instrNum);
-	}
+		return IMAP.get(instrNum);}
+	
 	public Map<Integer, Instruction> getIMAP() {
 		return IMAP;}
 
 	 public void setCode(int index, int op, int indirLvl, int arg){
-		 Code.setCode(index, op, indirLvl, arg);}
-	 
+		 Code.setCode(index, op, indirLvl, arg);} 
 	 
 	 public Code getCode(){
 		 return Code;}
 
-
 	 public int getData(int index){
-		 return memory.getData(index);
-	 }
+		 return memory.getData(index);}
 	
 	 public void setData(int index, int value){
-		 memory.setData(index, value);
-	 }
+		 memory.setData(index, value);}
 
 
 
