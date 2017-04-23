@@ -71,10 +71,9 @@ public class Assembler2 {
 				//else if(parts.length!=2)
 				//errors.add("Error: line " + (intext.indexOf(line)+1) + " Instruction missing argument");
 
-				System.out.println(parts[0]);
 				int arg = 0; 
 				if(parts.length!=1){
-					System.out.println(parts[1]);
+				
 					try {
 						arg = Integer.parseInt(parts[1],16);
 					} catch (NumberFormatException e) {
@@ -101,8 +100,6 @@ public class Assembler2 {
 				if(parts.length==2)
 					outtext.add(Integer.toHexString(opcode).toUpperCase() + " " + lvl + " " + parts[1]);}
 
-
-			System.out.println(errors.toString());
 			outtext.add("-1");
 			outtext.addAll(data);
 
@@ -111,8 +108,7 @@ public class Assembler2 {
 					for(String s : outtext) out.println(s);
 				} catch (FileNotFoundException e) {
 					errors.add("Cannot create output file");}}}
-
-		System.out.println(data.toString());}
+}
 
 	public static void main(String[] args) {
 		ArrayList<String> errors = new ArrayList<>();
