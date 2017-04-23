@@ -150,8 +150,18 @@ public class MachineModel {
 
 	 public void setCode(int index, int op, int indirLvl, int arg){
 		 Code.setCode(index, op, indirLvl, arg);}
+	 
+	 
 	 public Code getCode(){
 		 return Code;}
+
+	 public int getData(int index){
+		 return memory.getData(index);
+	 }
+	
+	 public void setData(int index, int value){
+		 memory.setData(index, value);
+	 }
 
 	 
 	 
